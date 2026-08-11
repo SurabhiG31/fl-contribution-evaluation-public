@@ -1,0 +1,23 @@
+Scenario,Runtime (seconds)
+label_skew,81.9455292224884
+quantity_skew,29.802913665771484
+pairwise_overlap_0,24.60351300239563
+global_overlap_0,24.665800094604492
+pairwise_overlap_25,24.53975224494934
+global_overlap_25,24.39930009841919
+pairwise_overlap_50,24.286897897720337
+global_overlap_50,24.439440965652466
+pairwise_overlap_75,23.429080963134766
+global_overlap_75,25.054476022720337
+pairwise_overlap_100,27.851989030838013
+global_overlap_100,24.712952852249146
+noniid_pairwise_overlap_0,61.14670372009277
+noniid_global_overlap_0,35.297513008117676
+noniid_pairwise_overlap_25,61.7913978099823
+noniid_global_overlap_25,34.98885917663574
+noniid_pairwise_overlap_50,62.15945601463318
+noniid_global_overlap_50,35.37867283821106
+noniid_pairwise_overlap_75,62.068995237350464
+noniid_global_overlap_75,34.768489837646484
+noniid_pairwise_overlap_100,62.012510776519775
+noniid_global_overlap_100,35.335973024368286

@@ -1,0 +1,97 @@
+mainloo.py: old
+import torch
+import time
+from torch.utils.data import DataLoader
+from data import (
+    load_mnist,
+    partition_label_skew,
+    partition_quantity_skew,
+    partition_partial_overlap,
+    partition_partial_overlap_3way,
+)
+from loo import compute_loo_across_rounds
+import csv
+
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+
+full_train, test_data = load_mnist()
+test_loader = DataLoader(test_data, batch_size=64, shuffle=False)
+
+SIZE_EACH = 6000  # fixed, shared across both overlap experiments
+
+'''
+overlap_2of3_data = partition_partial_overlap(full_train, size_each=SIZE_EACH, overlap_fraction=0.5)
+overlap_3of3_data = partition_partial_overlap_3way(full_train, size_each=SIZE_EACH, overlap_fraction=0.5)
+
+scenarios = {
+    "label_skew": partition_label_skew(full_train),
+    "quantity_skew": partition_quantity_skew(full_train),
+    "overlap_2of3_50pct": overlap_2of3_data,
+    "overlap_3of3_50pct": overlap_3of3_data,
+}
+'''
+
+overlap_levels = [0.0, 0.25, 0.50, 0.75, 1.0]
+
+scenarios = {
+    "label_skew": partition_label_skew(full_train),
+    "quantity_skew": partition_quantity_skew(full_train),
+}
+
+for overlap in overlap_levels:
+
+    scenarios[f"pairwise_overlap_{int(overlap*100)}"] = \
+        partition_partial_overlap(
+            full_train,
+            size_each=SIZE_EACH,
+            overlap_fraction=overlap
+        )
+
+    scenarios[f"global_overlap_{int(overlap*100)}"] = \
+        partition_partial_overlap_3way(
+            full_train,
+            size_each=SIZE_EACH,
+            overlap_fraction=overlap
+        )
+
+all_results = {}
+results = []
+for scenario_name, client_datasets in scenarios.items():
+    print(f"\n===== Scenario: {scenario_name} =====")
+    start = time.time()
+    history = compute_loo_across_rounds(
+        client_datasets,
+        device,
+        test_loader,
+        max_rounds=5,
+        local_epochs=1,
+    )    
+    elapsed = time.time() - start
+    results.append({
+    "scenario": scenario_name,
+    "runtime": elapsed,
+    "contributions": contributions
+})
+    print(f"Scenario '{scenario_name}' took {elapsed:.1f} seconds")
+    all_results[scenario_name] = contributions
+
+print("\n\n===== SUMMARY: LOO across all scenarios =====")
+for scenario_name, contributions in all_results.items():
+    print(f"\n{scenario_name}:")
+    for name, score in contributions.items():
+        print(f"  {name}: {score:.4f}")
+
+print("\n===== RUNTIME SUMMARY =====")
+for result in results:
+    print(f"{result['scenario']}: {result['runtime']:.2f} seconds")
+
+with open("runtime_results.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+
+    writer.writerow(["Scenario", "Runtime (seconds)"])
+
+    for result in results:
+        writer.writerow([
+            result["scenario"],
+            result["runtime"]
+        ])

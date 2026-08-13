@@ -1,0 +1,23 @@
+Scenario,Num Clients,Runtime (seconds)
+label_skew,4,176.83161306381226
+quantity_skew,4,72.05456614494324
+pairwise_overlap_0,3,38.35594296455383
+global_overlap_0,3,35.864994764328
+pairwise_overlap_25,3,35.8080940246582
+global_overlap_25,3,35.56259822845459
+pairwise_overlap_50,3,35.95665001869202
+global_overlap_50,3,36.68028473854065
+pairwise_overlap_75,3,35.87001299858093
+global_overlap_75,3,36.8282687664032
+pairwise_overlap_100,3,36.47607612609863
+global_overlap_100,3,35.54798412322998
+noniid_pairwise_overlap_0,3,85.88436388969421
+noniid_global_overlap_0,3,51.164933919906616
+noniid_pairwise_overlap_25,3,86.59739804267883
+noniid_global_overlap_25,3,50.99009466171265
+noniid_pairwise_overlap_50,3,84.9667899608612
+noniid_global_overlap_50,3,50.94984173774719
+noniid_pairwise_overlap_75,3,86.67306685447693
+noniid_global_overlap_75,3,50.60049891471863
+noniid_pairwise_overlap_100,3,85.12963008880615
+noniid_global_overlap_100,3,50.88282799720764

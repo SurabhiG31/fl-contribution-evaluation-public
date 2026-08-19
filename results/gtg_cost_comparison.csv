@@ -1,0 +1,45 @@
+scenario,method,trainings,evaluations
+label_skew,Exact Shapley,15,76
+label_skew,GTG-Shapley,1,85
+quantity_skew,Exact Shapley,15,76
+quantity_skew,GTG-Shapley,1,85
+pairwise_overlap_0,Exact Shapley,7,36
+pairwise_overlap_0,GTG-Shapley,1,45
+global_overlap_0,Exact Shapley,7,36
+global_overlap_0,GTG-Shapley,1,45
+pairwise_overlap_25,Exact Shapley,7,36
+pairwise_overlap_25,GTG-Shapley,1,45
+global_overlap_25,Exact Shapley,7,36
+global_overlap_25,GTG-Shapley,1,45
+pairwise_overlap_50,Exact Shapley,7,36
+pairwise_overlap_50,GTG-Shapley,1,45
+global_overlap_50,Exact Shapley,7,36
+global_overlap_50,GTG-Shapley,1,45
+pairwise_overlap_75,Exact Shapley,7,36
+pairwise_overlap_75,GTG-Shapley,1,45
+global_overlap_75,Exact Shapley,7,36
+global_overlap_75,GTG-Shapley,1,45
+pairwise_overlap_100,Exact Shapley,7,36
+pairwise_overlap_100,GTG-Shapley,1,45
+global_overlap_100,Exact Shapley,7,36
+global_overlap_100,GTG-Shapley,1,45
+noniid_pairwise_overlap_0,Exact Shapley,7,36
+noniid_pairwise_overlap_0,GTG-Shapley,1,45
+noniid_global_overlap_0,Exact Shapley,7,36
+noniid_global_overlap_0,GTG-Shapley,1,45
+noniid_pairwise_overlap_25,Exact Shapley,7,36
+noniid_pairwise_overlap_25,GTG-Shapley,1,45
+noniid_global_overlap_25,Exact Shapley,7,36
+noniid_global_overlap_25,GTG-Shapley,1,45
+noniid_pairwise_overlap_50,Exact Shapley,7,36
+noniid_pairwise_overlap_50,GTG-Shapley,1,45
+noniid_global_overlap_50,Exact Shapley,7,36
+noniid_global_overlap_50,GTG-Shapley,1,45
+noniid_pairwise_overlap_75,Exact Shapley,7,36
+noniid_pairwise_overlap_75,GTG-Shapley,1,45
+noniid_global_overlap_75,Exact Shapley,7,36
+noniid_global_overlap_75,GTG-Shapley,1,45
+noniid_pairwise_overlap_100,Exact Shapley,7,36
+noniid_pairwise_overlap_100,GTG-Shapley,1,45
+noniid_global_overlap_100,Exact Shapley,7,36
+noniid_global_overlap_100,GTG-Shapley,1,45

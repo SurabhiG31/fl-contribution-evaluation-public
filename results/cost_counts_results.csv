@@ -1,0 +1,67 @@
+scenario,method,trainings,evaluations
+label_skew,LOO,5,25
+label_skew,Exact Shapley,15,76
+label_skew,TMC-Shapley (10 samples),40,41
+quantity_skew,LOO,5,25
+quantity_skew,Exact Shapley,15,76
+quantity_skew,TMC-Shapley (10 samples),38,39
+pairwise_overlap_0,LOO,4,20
+pairwise_overlap_0,Exact Shapley,7,36
+pairwise_overlap_0,TMC-Shapley (exhaustive),18,19
+global_overlap_0,LOO,4,20
+global_overlap_0,Exact Shapley,7,36
+global_overlap_0,TMC-Shapley (exhaustive),17,18
+pairwise_overlap_25,LOO,4,20
+pairwise_overlap_25,Exact Shapley,7,36
+pairwise_overlap_25,TMC-Shapley (exhaustive),18,19
+global_overlap_25,LOO,4,20
+global_overlap_25,Exact Shapley,7,36
+global_overlap_25,TMC-Shapley (exhaustive),18,19
+pairwise_overlap_50,LOO,4,20
+pairwise_overlap_50,Exact Shapley,7,36
+pairwise_overlap_50,TMC-Shapley (exhaustive),18,19
+global_overlap_50,LOO,4,20
+global_overlap_50,Exact Shapley,7,36
+global_overlap_50,TMC-Shapley (exhaustive),18,19
+pairwise_overlap_75,LOO,4,20
+pairwise_overlap_75,Exact Shapley,7,36
+pairwise_overlap_75,TMC-Shapley (exhaustive),18,19
+global_overlap_75,LOO,4,20
+global_overlap_75,Exact Shapley,7,36
+global_overlap_75,TMC-Shapley (exhaustive),18,19
+pairwise_overlap_100,LOO,4,20
+pairwise_overlap_100,Exact Shapley,7,36
+pairwise_overlap_100,TMC-Shapley (exhaustive),18,19
+global_overlap_100,LOO,4,20
+global_overlap_100,Exact Shapley,7,36
+global_overlap_100,TMC-Shapley (exhaustive),18,19
+noniid_pairwise_overlap_0,LOO,4,20
+noniid_pairwise_overlap_0,Exact Shapley,7,36
+noniid_pairwise_overlap_0,TMC-Shapley (exhaustive),17,18
+noniid_global_overlap_0,LOO,4,20
+noniid_global_overlap_0,Exact Shapley,7,36
+noniid_global_overlap_0,TMC-Shapley (exhaustive),15,16
+noniid_pairwise_overlap_25,LOO,4,20
+noniid_pairwise_overlap_25,Exact Shapley,7,36
+noniid_pairwise_overlap_25,TMC-Shapley (exhaustive),17,18
+noniid_global_overlap_25,LOO,4,20
+noniid_global_overlap_25,Exact Shapley,7,36
+noniid_global_overlap_25,TMC-Shapley (exhaustive),13,14
+noniid_pairwise_overlap_50,LOO,4,20
+noniid_pairwise_overlap_50,Exact Shapley,7,36
+noniid_pairwise_overlap_50,TMC-Shapley (exhaustive),16,17
+noniid_global_overlap_50,LOO,4,20
+noniid_global_overlap_50,Exact Shapley,7,36
+noniid_global_overlap_50,TMC-Shapley (exhaustive),12,13
+noniid_pairwise_overlap_75,LOO,4,20
+noniid_pairwise_overlap_75,Exact Shapley,7,36
+noniid_pairwise_overlap_75,TMC-Shapley (exhaustive),17,18
+noniid_global_overlap_75,LOO,4,20
+noniid_global_overlap_75,Exact Shapley,7,36
+noniid_global_overlap_75,TMC-Shapley (exhaustive),14,15
+noniid_pairwise_overlap_100,LOO,4,20
+noniid_pairwise_overlap_100,Exact Shapley,7,36
+noniid_pairwise_overlap_100,TMC-Shapley (exhaustive),17,18
+noniid_global_overlap_100,LOO,4,20
+noniid_global_overlap_100,Exact Shapley,7,36
+noniid_global_overlap_100,TMC-Shapley (exhaustive),14,15

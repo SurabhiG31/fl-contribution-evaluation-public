@@ -3,6 +3,7 @@ from model import SimpleCNN
 from federated import run_federated_training
 from train_utils import set_seed, evaluate
 from federated import run_federated_training_with_checkpoints
+import itertools
 
 def compute_tmc_shapley(client_datasets, device, test_loader,
                          num_rounds=5, local_epochs=1,
@@ -197,3 +198,65 @@ def compute_tmc_shapley_exhaustive(client_datasets, device, test_loader,
             prev_acc = current_acc
 
     return {name: running_totals[name] / counts[name] for name in client_names}
+
+def compute_tmc_shapley_exhaustive_all_rounds(client_datasets, device, test_loader,
+                                                max_rounds=5, local_epochs=1, seed=42):
+    """
+    Exhaustive-permutation TMC-Shapley, checkpointed at every round.
+    Only feasible for small N (uses all N! permutations).
+    """
+    client_names = list(client_datasets.keys())
+    all_permutations = list(itertools.permutations(client_names))
+    n_permutations = len(all_permutations)
+
+    running_totals_by_round = {r: {name: 0.0 for name in client_names} for r in range(1, max_rounds+1)}
+    counts_by_round = {r: {name: 0 for name in client_names} for r in range(1, max_rounds+1)}
+
+    set_seed(seed)
+    empty_model = SimpleCNN().to(device)
+    empty_acc = evaluate(empty_model, test_loader, device)
+    empty_acc_by_round = {r: empty_acc for r in range(1, max_rounds+1)}
+
+    for sample_num, permutation in enumerate(all_permutations):
+        print(f"\n  Permutation {sample_num+1}/{n_permutations}: order = {list(permutation)}")
+        current_subset = []
+        prev_acc_by_round = empty_acc_by_round
+        truncated = False
+
+        for client in permutation:
+            if truncated:
+                for r in range(1, max_rounds+1):
+                    running_totals_by_round[r][client] += 0.0
+                    counts_by_round[r][client] += 1
+                continue
+
+            current_subset.append(client)
+            subset_datasets = {name: client_datasets[name] for name in current_subset}
+
+            set_seed(seed + sample_num)
+            model = SimpleCNN().to(device)
+            acc_by_round = run_federated_training_with_checkpoints(
+                subset_datasets, model, device, max_rounds=max_rounds,
+                local_epochs=local_epochs, test_loader=test_loader
+            )
+
+            for r in range(1, max_rounds+1):
+                marginal = acc_by_round[r] - prev_acc_by_round[r]
+                running_totals_by_round[r][client] += marginal
+                counts_by_round[r][client] += 1
+
+            final_marginal = acc_by_round[max_rounds] - prev_acc_by_round[max_rounds]
+            print(f"    +{client}: final-round {prev_acc_by_round[max_rounds]:.4f} -> {acc_by_round[max_rounds]:.4f} (marginal={final_marginal:.4f})")
+
+            if abs(final_marginal) < 0.001:
+                truncated = True
+                print(f"    -> truncating remaining clients")
+            prev_acc_by_round = acc_by_round
+
+    shapley_by_round = {}
+    for r in range(1, max_rounds+1):
+        shapley_by_round[r] = {
+            name: running_totals_by_round[r][name] / counts_by_round[r][name]
+            for name in client_names
+        }
+    return shapley_by_round
